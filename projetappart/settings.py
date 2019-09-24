@@ -14,8 +14,8 @@ BOT_NAME = 'projetappart'
 SPIDER_MODULES = ['projetappart.spiders']
 NEWSPIDER_MODULE = 'projetappart.spiders'
 
-FEED_FORMAT = "csv"
-FEED_URI = "results.csv"
+# FEED_FORMAT = "csv"
+# FEED_URI = "results.csv"
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
