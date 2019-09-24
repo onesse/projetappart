@@ -23,7 +23,8 @@ quartiers_toulon = ["haute ville", "pont du las", "mourillon", "saint jean du va
                     "port", "temple", "port", "besagne", "gare", "lamalgue", "beaucaire", "darboussede"]
 
 # annonces à rejeter si elles contiennent les mots suivants
-a_rejeter = ["viager", "à construire", "programme"]
+a_rejeter = ["viager", "à construire", "programme", "colocation", "location dans appartement", "chambre dans appartement",
+             "échange HLM"]
 
 
 class Ville(Enum):

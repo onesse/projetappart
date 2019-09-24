@@ -64,8 +64,6 @@ def parse_surface_bien(selector: Selector):
     :return: string
     """
     suface_str = selector.xpath('//div[@data-qa-id="criteria_item_square"]/div/div[last()]/text()').extract_first()
-    print(suface_str)
-    print('*************')
     surface = re.findall(r'\d+', suface_str)
     return surface[0] if len(surface) > 0 else None
 

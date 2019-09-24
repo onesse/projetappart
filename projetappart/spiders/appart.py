@@ -18,20 +18,24 @@ class AppartSpider(scrapy.Spider):
 
     # PARAMETRES DE RECHERCHE
 
-    type_recherche = RechercheCategorie.VENTES_IMMOBILIERES,
+    type_recherche = RechercheCategorie.LOCATIONS_IMMOBILIERES,
     localisations = [Ville.TOULON]
     types_etat = [TypeImmobilier.NEUF, TypeImmobilier.ANCIEN]
-    prix_min = 50000   # exprimé en €
-    prix_max = 225000  # exprimé en €
+    prix_min = 300   # exprimé en €
+    prix_max = 1500  # exprimé en €
     types_bien = [TypeBien.APPARTEMENT, TypeBien.MAISON]
 
     quartiers = quartiers_toulon  # None si non utilisé
 
     def start_requests(self):
-        dict_params = {"locations": ','.join(map(lambda c: str(c.value), self.localisations)),
-                       "immo_sell_type": ','.join(map(lambda c: str(c.value), self.types_etat)),
+        dict_params = {"category": ','.join(map(lambda c: str(c.value), self.type_recherche)),
+                       "locations": ','.join(map(lambda c: str(c.value), self.localisations)),
                        "price": str(self.prix_min) + '-' + str(self.prix_max),
                        "real_estate_type": ','.join(map(lambda c: str(c.value), self.types_bien))}
+
+        if self.type_recherche == RechercheCategorie.VENTES_IMMOBILIERES:
+            dict_params["immo_sell_type"] = ','.join(map(lambda c: str(c.value), self.types_etat))
+
         return [scrapy.FormRequest(URL_LEBONCOIN,
                                    formdata=dict_params, method='GET')]
 
