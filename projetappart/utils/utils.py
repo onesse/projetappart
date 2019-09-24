@@ -2,7 +2,7 @@ import re
 
 from scrapy import Selector
 
-from projetappart.const import list_bonus
+from projetappart.const import installations
 from projetappart.items import ProjetappartItem
 
 
@@ -80,7 +80,7 @@ def parse_description(selector: Selector):
     return description
 
 
-def parse_bonus(selector: Selector, item: ProjetappartItem):
+def parse_installations(selector: Selector, item: ProjetappartItem):
     """
     Extrait la surface du bien en m²
     :param selector:
@@ -91,13 +91,38 @@ def parse_bonus(selector: Selector, item: ProjetappartItem):
     if description is not None:
         description = description.lower()
 
-    for key, key_words in list_bonus.items():
+    for key, key_words in installations.items():
         if description is not None:
             for key_word in key_words:
-                if key_word in description.lower():
-                    item[key] = True
+                if key_word in description:
+                    item[key] = "X"
                 else:
-                    item[key] = False
+                    item[key] = ""
         else:
-            item[key] = False
+            item[key] = ""
+    return item
+
+
+def parse_quartier(selector: Selector, item: ProjetappartItem, list_quartiers):
+    """
+    Extrait le quartier de l'appartement
+    :param selector:
+    :return: string
+    """
+    description = parse_description(selector)
+
+    if description is not None:
+        description = description.lower()
+
+    if list_quartiers is None or description is None:
+        return item
+
+    # Recherche dans les 50 premiers mots
+    description = description[:50]
+
+    for quartier in list_quartiers:
+        if quartier in description:
+            item[quartier] = "X"
+        else:
+            item[quartier] = ""
     return item
