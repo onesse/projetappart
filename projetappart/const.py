@@ -14,7 +14,8 @@ installations = {
     "terrasse": ["terrasse", "balcon"],
     "garage": ["parking", "garage"],
     "piscine": ["piscine"],
-    "clim": ["clim", "climatisation", "climatisé"]
+    "clim": ["clim", "climatisation", "climatisé"],
+    "rez-de-chaussée": ["rez-de-chaussée"]
 }
 
 # Quartiers de Toulon
@@ -50,3 +51,11 @@ class TypeBien(Enum):
     AUTRE = 5
 
 
+class TypeLocation(Enum):
+    MEUBLEE = 1
+    NON_MEUBLEE = 2
+
+
+class TypeAnnonce(Enum):
+    PARTICULIER = "private"
+    PROFESSIONNEL = "pro"
