@@ -57,6 +57,24 @@ def parse_type_bien(selector: Selector):
     return selector.xpath('//div[@data-qa-id="criteria_item_real_estate_type"]/div/div[last()]/text()').extract_first()
 
 
+def parse_localisation(selector: Selector):
+    """
+    Extrait le type de bien
+    :param selector:
+    :return: string
+    """
+    return selector.xpath('//div[@data-qa-id="adview_location_informations"]/span/text()').extract_first()
+
+
+def parse_meublement(selector: Selector):
+    """
+    Extrait le type de bien
+    :param selector:
+    :return: string
+    """
+    return selector.xpath('//div[@data-qa-id="criteria_item_furnished"]/div/div[last()]/text()').extract_first()
+
+
 def parse_surface_bien(selector: Selector):
     """
     Extrait la surface du bien en m²
