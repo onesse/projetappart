@@ -57,6 +57,24 @@ def parse_type_bien(selector: Selector):
     return selector.xpath('//div[@data-qa-id="criteria_item_real_estate_type"]/div/div[last()]/text()').extract_first()
 
 
+def parse_localisation(selector: Selector):
+    """
+    Extrait le type de bien
+    :param selector:
+    :return: string
+    """
+    return selector.xpath('//div[@data-qa-id="adview_location_informations"]/span/text()').extract_first()
+
+
+def parse_meublement(selector: Selector):
+    """
+    Extrait le type de bien
+    :param selector:
+    :return: string
+    """
+    return selector.xpath('//div[@data-qa-id="criteria_item_furnished"]/div/div[last()]/text()').extract_first()
+
+
 def parse_surface_bien(selector: Selector):
     """
     Extrait la surface du bien en m²
@@ -91,15 +109,22 @@ def parse_installations(selector: Selector, item: ProjetappartItem):
     if description is not None:
         description = description.lower()
 
+    print(description)
+    print("**********************************************")
+
     for key, key_words in installations.items():
         if description is not None:
             for key_word in key_words:
                 if key_word in description:
                     item[key] = "X"
+                    print(key)
                 else:
                     item[key] = ""
+                if key in item:
+                    break
         else:
             item[key] = ""
+    print(item['terrasse'])
     return item
 
 
